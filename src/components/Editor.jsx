@@ -9,10 +9,17 @@ import QuillCursors from 'quill-cursors';
 
 Quill.register('modules/cursors', QuillCursors);
 
+
+const colors = ['#FF5733', '#33FF57', '#3357FF', '#F3FF33', '#FF33A1'];
+const animals = ['Lion', 'Tiger', 'Elephant', 'Giraffe', 'Zebra', 'Panda', 'Kangaroo', 'Dolphin', 'Penguin', 'Wolf'];
+
 const getRandomColor = () => {
-  const colors = ['#000'];
   return colors[Math.floor(Math.random() * colors.length) + 1];
 };
+
+function getRandomAnimal() {
+  return animals[Math.floor(Math.random() * animals.length)];
+}
 
 const Editor = () => {
   const editorContainerRef = useRef(null);
@@ -37,7 +44,7 @@ const Editor = () => {
 
       // 🔹 Connect WebSocketProvider (No Authentication)
       providerRef.current = new WebsocketProvider(
-        '<--- websocket-server-url --->', 'quill-demo-room', ydocRef.current
+        '<-Your Websocket server->', 'quill-demo-room', ydocRef.current
       );
       
 
@@ -57,7 +64,6 @@ const Editor = () => {
 
       // 🔹 Cursor module setup
       const cursors = quill.getModule('cursors');
-      console.log('cursors :: ', cursors);
       
 
       // 🔹 Observe awareness changes
@@ -69,10 +75,12 @@ const Editor = () => {
       })
 
       // 🔹 Set local user awareness
-      awareness.setLocalState({
-          name: `joker-${Math.floor(Math.random() * 100) + 1}`,
-          color: getRandomColor()
-        });
+      awareness.setLocalStateField('user', {
+        // Define a print name that should be displayed
+        name: getRandomAnimal(),
+        // Define a color that should be associated to the user:
+        color: getRandomColor() // should be a hex color
+      });
 
     }
 
