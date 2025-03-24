@@ -1,50 +1,63 @@
-# React + TypeScript + Vite
+# Doxle - Collaborative Real-Time Document Editor  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Inspired by Google Docs, **Doxle** is a real-time, cloud-based document editor that enables **live collaboration, offline storage, and seamless synchronization** using **Firebase, WebSockets, IndexedDB, and Quill.js**.  
 
-Currently, two official plugins are available:
+## 🚀 Features  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+✅ **Real-time Collaboration** – Multiple users can edit the document simultaneously.  
+✅ **WebSocket-based Synchronization** – Uses `y-websocket` for low-latency updates.  
+✅ **Offline Persistence** – Stores data locally using `y-indexeddb` for offline editing.  
+✅ **User Presence & Awareness** – Displays active users and their cursors in real time.  
+✅ **Secure Authentication** – Uses Firebase for anonymous sign-in.  
+✅ **Modern UI** – Built with Quill.js for a rich-text editing experience.  
 
-## Expanding the ESLint configuration
+## 🛠 Tech Stack  
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Frontend:** React, Quill.js  
+- **Backend:** WebSockets (y-websocket)  
+- **Database & Persistence:** IndexedDB  
+- **Authentication:** Firebase Authentication  
+- **Deployment:** Firebase Hosting  
 
-- Configure the top-level `parserOptions` property like this:
+## 📦 Installation & Setup  
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### 1️⃣ Clone the Repository  
+```sh
+git clone https://github.com/yourusername/doxle.git
+cd doxle
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+### 2️⃣ Install Dependencies  
+```sh
+npm install
 ```
+
+### 3️⃣ Configure Firebase  
+1. Create a Firebase project at [Firebase Console](https://console.firebase.google.com/).  
+2. Enable **Firestore**, **Authentication**, and **Hosting**.  
+3. Add your Firebase config in `firebase-config.js`.  
+
+### 4️⃣ Run the Project  
+```sh
+npm run dev
+```
+The app will be available at **`http://localhost:5173`** (or the port Vite uses).  
+
+## 🚀 Deploying to Firebase  
+
+To deploy the project:  
+```sh
+firebase deploy
+```
+
+
+
+
+## 🤝 Contributing  
+
+Contributions are welcome! Feel free to fork the repo, create a new branch, and submit a pull request.  
+
+---
+
+🚀 **Doxle** – Making real-time collaboration simple and seamless.
+
