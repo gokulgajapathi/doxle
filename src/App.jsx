@@ -6,6 +6,8 @@ import { signInAnonymously, onAuthStateChanged } from 'firebase/auth'
 import Editor  from './components/Editor';
 import Header from './components/Header'
 import Footer from './components/Footer';
+import { Route, Router, Routes } from 'react-router-dom';
+import { Login } from './components/Login'
 
 function App() {
 
@@ -14,8 +16,8 @@ function App() {
     console.log('IndexedDB data deleted for quill-demo-room');
   };
 
-  useEffect(() => {
-    signInAnonymously(auth);
+  useEffect (() => {
+     signInAnonymously(auth);
     onAuthStateChanged(auth, user => {
       if(user) {
         console.log(`User signed in: ${user.uid}`);
@@ -25,11 +27,17 @@ function App() {
   }, []);
 
   return (
-        <div>
-          <Header clearIndexedDB={clearIndexedDB}/>
-          <Editor />
-          <Footer />
-        </div>
+    
+      <div>
+      <Header clearIndexedDB={clearIndexedDB} />
+
+        <Routes> 
+          <Route path="/" element={<Login />} />
+          <Route path="/editor" element={<Editor />} />
+        </Routes>
+
+      <Footer />
+    </div>
   )
 }
 

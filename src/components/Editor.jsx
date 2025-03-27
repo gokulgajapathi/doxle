@@ -10,7 +10,7 @@ import QuillCursors from 'quill-cursors';
 Quill.register('modules/cursors', QuillCursors);
 
 
-const colors = ['#FF5733', '#33FF57', '#3357FF', '#F3FF33', '#FF33A1'];
+const colors = ['#1E1E1E', '#007ACC', '#228B22', '#8B0000', '#483D8B'];
 const animals = ['Lion', 'Tiger', 'Elephant', 'Giraffe', 'Zebra', 'Panda', 'Kangaroo', 'Dolphin', 'Penguin', 'Wolf'];
 
 const getRandomColor = () => {
@@ -19,7 +19,21 @@ const getRandomColor = () => {
 
 function getRandomAnimal() {
   return animals[Math.floor(Math.random() * animals.length)];
-}
+};
+
+const styles = {
+  button: {
+    backgroundColor: 'red',
+    color: 'white',
+    border: '1px solid white',
+    padding: '10px',
+    marginLeft: '5px',
+    borderRadius: '15px 5px'
+  },
+  text: {
+    textAlign: 'center'
+  }
+};
 
 const Editor = () => {
   const editorContainerRef = useRef(null);
@@ -44,7 +58,7 @@ const Editor = () => {
 
       // 🔹 Connect WebSocketProvider (No Authentication)
       providerRef.current = new WebsocketProvider(
-        '<-Your Websocket server->', 'quill-demo-room', ydocRef.current
+        'wss://demos.yjs.dev/ws', 'quill-demo-room', ydocRef.current
       );
       
 
@@ -92,8 +106,16 @@ const Editor = () => {
     };
   }, []);
 
-  return <div ref={editorContainerRef} style={{ height: '505px' }} />;
-};
+  return (
+      <div>
+        <p style={styles.text}>
+          Once you're done exploring, we can delete our data using this button: 
+          <button style={styles.button} onClick={clearIndexedDB}> Delete </button>
+        </p>
+        
+        <div ref={editorContainerRef} style={{ height: '505px' }} />;
+      </div>
+)};
 
 // 🔹 Function to Clear IndexedDB
 export const clearIndexedDB = async () => {
