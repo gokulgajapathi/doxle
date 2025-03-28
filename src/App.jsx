@@ -2,12 +2,15 @@ import { useEffect } from 'react'
 import './App.css'
 import { auth } from './firebase-config'
 import { IndexeddbPersistence } from 'y-indexeddb';
-import { signInAnonymously, onAuthStateChanged } from 'firebase/auth'
+import { onAuthStateChanged } from 'firebase/auth'
 import Editor  from './components/Editor';
 import Header from './components/Header'
 import Footer from './components/Footer';
 import { Route, Router, Routes } from 'react-router-dom';
 import { Login } from './components/Login'
+import { ToastContainer } from 'react-toastify';
+import ProtectedRoutes from './utils/ProtectedRoutes';
+import NotFound from './components/NotFound';
 
 function App() {
 
@@ -16,29 +19,34 @@ function App() {
     console.log('IndexedDB data deleted for quill-demo-room');
   };
 
-  useEffect (() => {
-     signInAnonymously(auth);
-    onAuthStateChanged(auth, user => {
-      if(user) {
-        console.log(`User signed in: ${user.uid}`);
+  // useEffect (() => {
+  //   onAuthStateChanged(auth, async(user) => {
+  //     if(user) {
+  //       console.log(`User signed in: ${ user.displayName}`);
         
-      }
-    });
-  }, []);
+  //     }
+  //   });
+  // }, []);
 
   return (
-    
-      <div>
-      <Header clearIndexedDB={clearIndexedDB} />
+    <>
+      <Header clearIndexedDB={clearIndexedDB} /> {/* ✅ Moved outside <Routes> */}
 
-        <Routes> 
-          <Route path="/" element={<Login />} />
+      <ToastContainer /> {/* ✅ Also moved outside <Routes> */}
+      
+      <Routes> 
+        <Route path="/" element={<Login />} />
+
+        <Route element={<ProtectedRoutes />}>
           <Route path="/editor" element={<Editor />} />
-        </Routes>
+        </Route>
 
-      <Footer />
-    </div>
-  )
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+
+      <Footer /> {/* ✅ Moved outside <Routes> */}
+    </>
+  );
 }
 
 export default App
