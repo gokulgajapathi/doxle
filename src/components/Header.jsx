@@ -1,8 +1,19 @@
 import React from 'react'
-import { clearIndexedDB } from './Editor';
 
 const Header = () => {
-  
+  const styles = {
+    button: {
+      backgroundColor: 'red',
+      color: 'white',
+      border: '1px solid white',
+      padding: '10px',
+      marginLeft: '5px',
+      borderRadius: '15px 5px'
+    },
+    text: {
+      textAlign: 'center'
+    }
+  };
 
   
 

@@ -10,6 +10,7 @@ export const Login = () => {
 
   const handleGoogleSignIn = () => {
     console.log("Google Sign-In Clicked");
+
     // Implement Google Sign-In logic
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider).then( (result) => {
@@ -54,15 +55,12 @@ export const Login = () => {
     },
     button: {
       width: "100%",
+      cursor: 'pointer',
     },
     terms: {
       fontSize: "14px",
       color: "#6b7280",
       marginTop: "16px",
-    },
-    link: {
-      color: "#3b82f6",
-      textDecoration: "none",
     },
   };
   

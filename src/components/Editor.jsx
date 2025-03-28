@@ -9,7 +9,6 @@ import QuillCursors from 'quill-cursors';
 import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase-config';
-import { onAuthStateChanged } from 'firebase/auth'
 import { useOutletContext } from "react-router-dom";
 
 
@@ -35,14 +34,8 @@ const styles = {
     border: '1px solid white',
     padding: '10px',
     marginLeft: '5px',
-    borderRadius: '0px 20px 20px 0px'
-  },delete: {
-    backgroundColor: 'red',
-    color: 'white',
-    border: '1px solid white',
-    padding: '10px',
-    marginLeft: '5px',
-    borderRadius: '20px 0px 0px 20px'
+    borderRadius: '20px 20px 20px 20px',
+    cursor: 'pointer'
   },
   text: {
     textAlign: 'center'
@@ -82,7 +75,6 @@ const Editor = () => {
     }
   };
 
-  
   useEffect(() => {
     if (editorContainerRef.current && !quillRef.current) {
       const Block = Quill.import('blots/block');
@@ -104,13 +96,13 @@ const Editor = () => {
           ydocRef.current
         );
       }
-      
+
       
 
       //Offline Support using IndexedDB
       const persistence = new IndexeddbPersistence('quill-demo-room', ydocRef.current);
-      
-      
+
+
 
       // Ensure provider is connected
       providerRef.current.on('status', ({ status }) => {
@@ -158,22 +150,24 @@ const Editor = () => {
   return (
       <div><br />
         <h1 style={styles.name}>Welcome {user.displayName}!</h1>
-        <p style={styles.span}>- Name fetched from Google sign in(Oauth) </p><br />
-        <p style={styles.text}>
-          Once you're done exploring, we can delete our data using this button: 
-          <button style={styles.delete} onClick={clearIndexedDB}> Delete </button>
-          <button style={styles.signout} onClick={handleLogout}>Sign Out</button>
-        </p>
+        <p style={styles.span}>- Name fetched from Google sign in(Oauth) 
+        <button style={styles.signout} onClick={handleLogout}>Sign Out</button>
+       
+        {/* <button style={styles.delete} onClick={clearIndexedDB}> Delete </button> */}
+
+
+          </p><br />
+        
         
         <div ref={editorContainerRef} style={{ height: '505px' }} />
       </div>
 )};
 
 // 🔹 Function to Clear IndexedDB
-export const clearIndexedDB = async () => {
-  const provider = new IndexeddbPersistence('quill-demo-room', new Y.Doc());
-  await provider.clearData();
-  console.log('IndexedDB data deleted for quill-demo-room');
-};
+// export const clearIndexedDB = async () => {
+//   const provider = new IndexeddbPersistence('quill-demo-room', new Y.Doc());
+//   await provider.clearData();
+//   console.log('IndexedDB data deleted for quill-demo-room');
+// };
 
 export default Editor;

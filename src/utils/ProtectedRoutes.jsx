@@ -6,27 +6,28 @@ import { toast } from "react-toastify";
 
 const ProtectedRoutes = () => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // Avoid flashing login screen
+  const [loading, setLoading] = useState(true);
+  const [redirecting, setRedirecting] = useState(false); 
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false); // Stop loading once we know auth state
+      setLoading(false);
     });
 
-    return () => unsubscribe(); // Cleanup on unmount
+    return () => unsubscribe();
   }, []);
 
-  if (loading) return <div>Loading...</div>; // Prevent UI flicker
+  useEffect(() => {
+    if (!loading && !user && !redirecting) {
+      toast.error("Please sign in!", { position: "top-center" });
+      setRedirecting(true);
+    }
+  }, [loading, user, redirecting]);
 
-  if (!user) {
-    toast.error("You must be logged in to access this page!",{
-      position: "top-center"
-    });
-    return <Navigate to="/" />;
-  }
+  if (loading) return <div>Loading...</div>;
 
-  return <Outlet context={{ user }} />;
+  return user ? <Outlet context={{ user }} /> : <Navigate to="/" />;
 };
 
 export default ProtectedRoutes;
