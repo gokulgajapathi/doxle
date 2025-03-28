@@ -165,7 +165,7 @@ const Editor = () => {
           <button style={styles.signout} onClick={handleLogout}>Sign Out</button>
         </p>
         
-        <div ref={editorContainerRef} style={{ height: '505px' }} />;
+        <div ref={editorContainerRef} style={{ height: '505px' }} />
       </div>
 )};
 
