@@ -1,3 +1,8 @@
+/*
+ * App.jsx
+ * 
+ * Entry point of the application that sets up routing and global components (header & footer).
+ */
 import './App.css'
 import Editor  from './components/Editor';
 import Header from './components/Header'
@@ -16,6 +21,10 @@ function App() {
   // };
 
   return (
+     /*
+   * Renders the global header and footer.
+   * Uses Routes to manage navigation across different pages.
+   */
     <>
       <Header /> 
 
@@ -23,10 +32,12 @@ function App() {
       <Routes> 
         <Route path="/" element={<Login />} />
 
+        {/* Protected route for Editor */}
         <Route element={<ProtectedRoutes />}>
           <Route path="/editor" element={<Editor />} />
         </Route>
 
+        {/* Catch-all route for undefined paths */}
         <Route path="*" element={<NotFound />} />
       </Routes>
 

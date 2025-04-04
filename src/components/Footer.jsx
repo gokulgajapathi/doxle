@@ -1,3 +1,8 @@
+/*
+ * Footer.js
+ * 
+ * Displays footer content including social media links.
+ */
 import React from 'react'
 import { SocialIcon } from 'react-social-icons';
 

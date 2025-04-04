@@ -1,3 +1,8 @@
+/*
+ * NotFound.js
+ * 
+ * Handles unknown routes by displaying a 404 error message.
+ */
 import React from "react";
 import { Link } from "react-router-dom";
 

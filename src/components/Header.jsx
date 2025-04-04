@@ -1,3 +1,11 @@
+/*
+ * Header.js
+ *
+ * This component renders the header section of the application.
+ * It displays the title and branding for the app.
+ * The styling is applied via inline style objects.
+ */
+
 import React from 'react'
 
 const Header = () => {

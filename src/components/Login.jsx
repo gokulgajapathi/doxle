@@ -1,3 +1,8 @@
+/*
+ * Login.js
+ * 
+ * Provides authentication functionality using Google Sign-In.
+ */
 import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import {React, useState} from "react";
 import GoogleButton from "react-google-button";
@@ -8,6 +13,11 @@ import { toast } from "react-toastify";
 export const Login = () => {
   const navigate = useNavigate();
 
+  /*
+   * Function to handle Google Sign-In
+   * - Initiates Firebase authentication popup
+   * - If successful, redirects to the Editor page
+   */
   const handleGoogleSignIn = () => {
     console.log("Google Sign-In Clicked");
 
